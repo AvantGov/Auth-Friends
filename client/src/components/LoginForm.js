@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 
 const LoginForm = () => {
 
-    // define login logic 
+    // define local state 
+    const [ input, setInput ] = useState({})
 
-    // define handle change logic 
+    // define handlechange logic 
 
+    const handleChange = (event) => {
+        event.preventDefault();
+        setInput({
+            ...input,
+            [event.target.name]: event.target.value
+        })
+        console.log('look here, hoss:',input)
+    }
+
+    // implement login logic from external file 
 
     return (
         <div className='login-form-container'>
@@ -17,7 +28,7 @@ const LoginForm = () => {
                 type='text'
                 name='username'
                 // value={}
-                // onChange={}
+                onChange={handleChange}
             />
         <label htmlFor="username">Password:</label>
             <input 
@@ -25,7 +36,7 @@ const LoginForm = () => {
                 type='text'
                 name='password'
                 // value={}
-                // onChange={}
+                onChange={handleChange}
             />
         <button 
             className='login-form-container__button'
