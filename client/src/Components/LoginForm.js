@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 
 const LoginForm = () => {
 
     //decalring state of component
     const [userInput, setUserInput] = useState({})
+
+    //declaring history object
+    const history = useHistory();
 
     //handling input changes 
     const handleChange = (event) => { 
@@ -25,7 +29,11 @@ const LoginForm = () => {
             .then((response) => {
                 console.log('look here for the login response', response);
                 localStorage.setItem('token', response.data.payload)
-                setUserInput({})
+                setUserInput({
+                    username: "",
+                    password: ""
+                })
+                history.push("/protected")
             })
             .catch((error) => {
                 console.log('look here for the error messages on the login:', error)
