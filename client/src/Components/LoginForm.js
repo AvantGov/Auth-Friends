@@ -7,6 +7,7 @@ const LoginForm = () => {
 
     //decalring state of component
     const [userInput, setUserInput] = useState({})
+    const [errorMessage, setErrorMessage] = useState('')
 
     //declaring history object
     const history = useHistory();
@@ -37,13 +38,9 @@ const LoginForm = () => {
             })
             .catch((error) => {
                 console.log('look here for the error messages on the login:', error)
+                setErrorMessage(error)
             })
     }
-
-
-    //sending login request to the server 
-
-    //handling promise reponse 
 
 
     return(
@@ -69,6 +66,8 @@ const LoginForm = () => {
                 onClick={login}
                 className='login-form-container__button'
             >Login</button>
+
+            <h1>{`${errorMessage}`}</h1>
         </div>
     )
 }
