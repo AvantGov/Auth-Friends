@@ -2,34 +2,35 @@ import React, { useState } from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 
-const UserForm = () => {
+const ModifyForm = () => {
 
-    const [userInput, setUserInput] = useState({})
-    
+    const [userInput, setUserInput] = useState({});
 
     const handleChange = (event) => {
-        event.preventDefault();
+        event.preventDefault()
         setUserInput({
             ...userInput,
             [event.target.name]: event.target.value
         })
     }
 
-    const submitUser = () => {
+    const submitMod = (event) => {
+        event.preventDefault()
         axiosWithAuth()
-        .post(`friends/`, userInput)
-            .then((response) => {
-                console.log(response)
-                window.location.reload(false)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        .put(`friends/${userInput.id}`, userInput)
+        .then((response) => {
+            console.log('look at the mod response', response)
+            window.location.reload(false)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
     }
 
     return(
-        <div className='user-form-container'>
-            <h2> User Create: </h2>
+        <div className='modify-form-container'>
+            <h2> User Edit: </h2>
             <label htmlFor='name'>Name</label>
             <input 
                 className='user-form-container__input'
@@ -54,12 +55,20 @@ const UserForm = () => {
                 // value={}
                 onChange={handleChange}
             />
+            <label htmlFor='user-id'>User ID</label>
+            <input 
+                className='user-form-container__input'
+                type='text'
+                name='id'
+                // value={}
+                onChange={handleChange}
+            />
             <button 
-                onClick={submitUser}
-                className='user-form-container__button'>Create
-            </button>
+                onClick={submitMod}
+                className='user-form-container__button'>Mod It!
+            </button> 
         </div>
     )
 }
 
-export default UserForm;
+export default ModifyForm;

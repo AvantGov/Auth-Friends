@@ -21,7 +21,6 @@ const ProtectedList = () => {
             .catch((error) => {
                 console.log('error on the port bow!', error)
             })
-
     }, [])
 
     console.log('dataaa please', data)

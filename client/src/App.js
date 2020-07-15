@@ -10,6 +10,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import ProtectedList from './Components/ProtectedList';
 import LoginForm from './Components/LoginForm'
 import UserForm from './Components/UserForm';
+import ModifyForm from './Components/ModifyForm'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       </Switch>
       <Route exact path='/protected' component={UserForm} />
       <Route exact path='/protected' component={DeleteForm} />
+      <Route exact path='/protected' component={ModifyForm} />
     </div>
   );
 }
