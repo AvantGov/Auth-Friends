@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 
 const UserForm = () => {
@@ -8,18 +9,28 @@ const UserForm = () => {
     const handleChange = (event) => {
         event.preventDefault();
         setUserInput({
+            ...userInput,
             [event.target.name]: event.target.value
         })
     }
 
-    
+    const submitUser = () => {
+        axiosWithAuth()
+        .post(`/friends/`, userInput)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     return(
         <div className='user-form-container'>
             <h2> User Edit: </h2>
             <label htmlFor='name'>Name</label>
             <input 
-                className='login-form-container__input'
+                className='user-form-container__input'
                 type='text'
                 name='name'
                 // value={}
@@ -27,7 +38,7 @@ const UserForm = () => {
             />
             <label htmlFor='age'>Age</label>
             <input 
-                className='login-form-container__input'
+                className='user-form-container__input'
                 type='number'
                 name='age'
                 // value={}
@@ -35,21 +46,16 @@ const UserForm = () => {
             />
             <label htmlFor='email'>Email</label>
             <input 
-                className='login-form-container__input'
+                className='user-form-container__input'
                 type='text'
                 name='email'
                 // value={}
                 onChange={handleChange}
             />
             <button 
-                // onClick={}
-                className='login-form-container__button'>Modify
+                onClick={submitUser}
+                className='user-form-container__button'>Create
             </button>
-            <button 
-                // onClick={}
-                className='login-form-container__button'>Delete
-            </button>
-            
         </div>
     )
 }

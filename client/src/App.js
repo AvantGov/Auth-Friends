@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 
+
+
 // components 
 import DeleteForm from '../src/Components/DeleteForm';
 import PrivateRoute from './Components/PrivateRoute';
@@ -18,6 +20,7 @@ function App() {
         <PrivateRoute exact path='/protected' component={ProtectedList} />
       </Switch>
       <Route exact path='/protected' component={UserForm} />
+      <Route exact path='/protected' component={DeleteForm} />
     </div>
   );
 }
